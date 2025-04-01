@@ -1,0 +1,33 @@
+@model UserRegisterDto
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "_Layout";
+}
+
+<h2 class="text-center">Register</h2>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form asp-controller="Account" asp-action="Register" method="post">
+            <div class="form-group mb-3">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="Email" required>
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group mb-3">
+                <label for="nickname">Nickname</label>
+                <input type="text" class="form-control" id="nickname" name="Nickname" required>
+                <span asp-validation-for="Nickname" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="Password" name="Password" required>
+                <span asp-validation-for="Password" id="password" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+        <p class="mt-3 text-center">
+            계정이 이미 있으신가요? <a asp-controller="Account" asp-action="Login">로그인 이동</a>
+        </p>
+    </div>
+</div>
