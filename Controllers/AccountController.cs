@@ -20,7 +20,7 @@ public class AccountController : Controller
 
     [HttpGet]
     public IActionResult Register() => View();
-    
+
     [HttpPost]
     public async Task<IActionResult> Register([FromForm] UserRegisterDto dto)
     {
@@ -35,11 +35,11 @@ public class AccountController : Controller
             ModelState.AddModelError(string.Empty, "비밀번호가 일치하지 않습니다.");
             return View(dto);
         }
-        
+
         await _accountService.RegisterAsync(dto);
         return RedirectToAction("Login", "Account");
     }
-    
+
     [HttpGet]
     public IActionResult Login() => View("Login");
 
@@ -50,15 +50,11 @@ public class AccountController : Controller
         {
             return RedirectToAction("Index", "Home");
         }
-        else
-        {
-            ModelState.AddModelError(string.Empty, "이메일 혹은 패스워드가 일치하지 않습니다.");
-        }
-        
 
+        ModelState.AddModelError(string.Empty, "이메일 혹은 패스워드가 일치하지 않습니다.");
         return View();
     }
-    
+
     [Authorize]
     [HttpGet]
     public async Task<IActionResult> Logout()
