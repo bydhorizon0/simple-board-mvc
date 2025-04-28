@@ -21,8 +21,8 @@
     
     <data name="InsertUser" xml:space="preserve"> 
         <value>
-            INSERT INTO Users(email, nickname, passwordHash, role)
-            VALUES (@Email, @Nickname, @PasswordHash, @Role);
+            INSERT INTO Users(email, nickname, password, role)
+            VALUES (@Email, @Nickname, @Password, @Role);
         </value>
     </data>
     

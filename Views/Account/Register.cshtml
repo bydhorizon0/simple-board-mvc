@@ -11,18 +11,23 @@
         <form asp-controller="Account" asp-action="Register" method="post">
             <div class="form-group mb-3">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="Email" required>
+                <input type="email" class="form-control" id="email" name="Email" value="@Model?.Email" required>
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
             <div class="form-group mb-3">
                 <label for="nickname">Nickname</label>
-                <input type="text" class="form-control" id="nickname" name="Nickname" required>
+                <input type="text" class="form-control" id="nickname" name="Nickname" value="@Model?.Nickname" required>
                 <span asp-validation-for="Nickname" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="Password" name="Password" required>
+                <input type="password" class="form-control" id="password" name="Password" required>
                 <span asp-validation-for="Password" id="password" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label for="password">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword" name="ConfirmPassword" required>
+                <span asp-validation-for="ConfirmPassword" id="confirmPassword" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-primary w-100">Register</button>
         </form>

@@ -23,7 +23,7 @@ public class AccountRepository : BaseRepository<AccountRepository>
         {
             Email = dto.Email,
             Nickname = dto.Nickname,
-            PasswordHash = _passwordHasher.HashPassword(dto.Password),
+            Password = _passwordHasher.HashPassword(dto.Password),
             Role = Role.USER.ToString(),
         }));
     }

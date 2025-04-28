@@ -45,7 +45,7 @@ public class AccountService : IAccountService
         if (dbUser == null)
             return false;
 
-        if (!_passwordHasher.VerifyPassword(dbUser.PasswordHash, dto.Password))
+        if (!_passwordHasher.VerifyPassword(dbUser.Password, dto.Password))
             return false; 
 
         var claims = new List<Claim>

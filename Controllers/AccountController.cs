@@ -24,14 +24,20 @@ public class AccountController : Controller
     [HttpPost]
     public async Task<IActionResult> Register([FromForm] UserRegisterDto dto)
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
-            await _accountService.RegisterAsync(dto);
-            return RedirectToAction("Login", "Account");
+            ModelState.AddModelError(string.Empty, "가입양식을 정확히 기입해주세요.");
+            return View(dto);
+        }
+
+        if (!dto.Password.Equals(dto.ConfirmPassword))
+        {
+            ModelState.AddModelError(string.Empty, "비밀번호가 일치하지 않습니다.");
+            return View(dto);
         }
         
-        ModelState.AddModelError(string.Empty, "가입양식을 정확히 기입해주세요.");
-        return View();
+        await _accountService.RegisterAsync(dto);
+        return RedirectToAction("Login", "Account");
     }
     
     [HttpGet]
@@ -44,8 +50,12 @@ public class AccountController : Controller
         {
             return RedirectToAction("Index", "Home");
         }
+        else
+        {
+            ModelState.AddModelError(string.Empty, "이메일 혹은 패스워드가 일치하지 않습니다.");
+        }
+        
 
-        ModelState.AddModelError(string.Empty, "로그인 실패");
         return View();
     }
     
